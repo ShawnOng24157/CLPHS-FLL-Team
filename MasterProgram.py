@@ -23,7 +23,6 @@ import Cybertronics_R9 as route9
 
 # List of available route modules
 ROUTE_MODULES = {
-    0: route0,
     1: route1,
     2: route2,
     3: route3,
@@ -37,7 +36,6 @@ ROUTE_MODULES = {
 
 # Dictionary mapping route number to the execution function
 ROUTES = {
-    0: route0.Route0,
     1: route1.Route1,
     2: route2.Route2,
     3: route3.Route3,
