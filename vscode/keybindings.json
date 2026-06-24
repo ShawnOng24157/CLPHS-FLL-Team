@@ -1,0 +1,12 @@
+[
+    {
+        "key" : "ctrl+shift+l",
+        "command" : "workbench.action.tasks.runTask",
+        "args": "Run on robot"
+    },
+    {
+        "key" : "ctrl+alt+l",
+        "command" : "workbench.action.tasks.runTask",
+        "args": "Run on any robot"
+    }
+]
