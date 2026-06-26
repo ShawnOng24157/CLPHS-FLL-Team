@@ -42,12 +42,13 @@ def Route2(laura: Laura):
     laura.adapter_motor_seconds(RIGHT_ADAPTER, -1000, 700, wait_complete=False)
     laura.gyro_time(50, 950, 43)
     laura.adapter_motor_seconds(LEFT_ADAPTER, 1000, 800)
-    laura.adapter_motor_seconds(RIGHT_ADAPTER, 400, 1100)
-    laura.adapter_motor_seconds(LEFT_ADAPTER, -1000, 800, Stop.COAST, False)
+    laura.adapter_motor_seconds(RIGHT_ADAPTER, 400, 1200)
+    laura.adapter_motor_seconds(LEFT_ADAPTER, -1000, 900, Stop.BRAKE, False)
     laura.gyro_acc(-80, 150, 45, stop=False)
     laura.gyro_point_turn(-20, False)
     laura.gyro_degree(-150, 600, -10, stop=False)
-    laura.gyro_degree(-150, 500, 0)
+    laura.gyro_degree(-150, 500, 0, stop=False)
+    laura.gyro_lock_turn(RIGHT_DRIVE, 0)
 
     """ Route end """
     elapsed_time = routeTimer.time() / 1000

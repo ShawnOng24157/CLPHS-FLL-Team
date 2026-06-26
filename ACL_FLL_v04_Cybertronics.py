@@ -701,16 +701,17 @@ class Laura():
         self._drive_base.settings(speed, accel, 500, accel)
         self._drive_base.curve(radius, angle, stop_method, wait_complete)
 
-    def wait_for_adapter_free(self, left_power, right_power, retract_left_speed=0, retract_right_speed=0, retract_duration=500, timeout=5000):
+    def wait_for_adapter_free(self, left_power, right_power, left_limit, right_limit,
+                            retract_left_speed=0, retract_right_speed=0,
+                            retract_duration=500, timeout=5000):
 
-        left_limit=right_limit=30
         self._stopWatch.reset()
-        freed = False  # Track if arms actually became free
 
         while self._stopWatch.time() < timeout:
+            # Drive both motors first, THEN read load
             self._left_adapter.dc(left_power)
             self._right_adapter.dc(right_power)
-            wait(50)
+            wait(50)  # Let motors settle so load reading is meaningful
 
             left_load  = abs(self._left_adapter.load())
             right_load = abs(self._right_adapter.load())
@@ -719,7 +720,6 @@ class Laura():
             right_free = right_load < abs(right_limit)
 
             if left_free and right_free:
-                freed = True
                 break
 
             wait(10)
@@ -727,13 +727,8 @@ class Laura():
         self._left_adapter.brake()
         self._right_adapter.brake()
 
-        if not freed:
-            return  # Timed out, do nothing
-
         # Retract
         if retract_left_speed != 0:
             self.adapter_motor_seconds(LEFT_ADAPTER,  speed=retract_left_speed,  duration=retract_duration, wait_complete=False)
         if retract_right_speed != 0:
             self.adapter_motor_seconds(RIGHT_ADAPTER, speed=retract_right_speed, duration=retract_duration, wait_complete=True)
-        
-        return True
