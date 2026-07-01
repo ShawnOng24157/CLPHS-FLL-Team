@@ -41,7 +41,7 @@ def Route9(laura: Laura):
     laura.encoder_degree(-30, -30, 100)
     laura.adapter_motor_seconds(LEFT_ADAPTER, -600, 1700, wait_complete=False)
     laura.encoder_degree(-60, -60, 300)
-    laura.gyro_acc(-60, 280, 0)
+    laura.gyro_acc(-60, 280, 20)
 
 
 
