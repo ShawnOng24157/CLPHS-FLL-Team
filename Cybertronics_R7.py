@@ -6,7 +6,7 @@ from ACL_FLL_v04_Cybertronics import *
 ################## Shared and local constants ##################
 
 # Adapter configuration: (LeftPower, RightPower, LeftLimit, RightLimit)
-ROUTE_ADAPTER_POWER = (0, 0, 30, 30)
+ROUTE_ADAPTER_POWER = (1, 0, 30, 30)
 
 # Route-Specific PID Gains
 STR_KP_CUSTOM = 1.5
@@ -33,7 +33,11 @@ def Route7(laura: Laura):
     laura.hub_status_light(Color.MAGENTA)
 
     """ Start your code here """
-
+    laura.wall_square(-35,300,0)
+    laura.encoder_degree(70,70,1200,True)
+    laura.gyro_point_turn(-40,True,10,20)
+    laura.encoder_degree(50,50,200,True)
+    laura.adapter_motor_seconds()
 
 
 
