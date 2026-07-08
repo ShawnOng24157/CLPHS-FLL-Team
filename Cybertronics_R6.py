@@ -21,7 +21,7 @@ LF_KD_CUSTOM = 0.1
 ######################## Route program ########################
 
 # --- Starting position ---
-# Blue base - Robot right wheel align 1st line from right
+# Blue base - Robot left wheel align 1.0 line from left
 # Mission - Mountain rock
 
 def Route6(laura: Laura):

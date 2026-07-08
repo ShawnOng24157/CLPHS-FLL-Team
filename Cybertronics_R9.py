@@ -33,15 +33,17 @@ def Route9(laura: Laura):
     laura.hub_status_light(Color.MAGENTA)
 
     """ Start your code here """
-    laura.encoder_degree(60, 60, 540)
-    laura.encoder_degree(40, -40, 120)
+    laura.encoder_degree(60, 60, 600)
+    laura.encoder_degree(40, -40, 128)
     laura.adapter_motor_seconds(LEFT_ADAPTER, 500, 2000, wait_complete=False)
     laura.encoder_time(40, 40, 3000)
     wait(200)
-    laura.encoder_degree(-30, -30, 100)
+    laura.encoder_degree(-30, -30, 150)
     laura.adapter_motor_seconds(LEFT_ADAPTER, -600, 1700, wait_complete=False)
     laura.encoder_degree(-60, -60, 300)
-    laura.gyro_acc(-60, 280, 20)
+    laura.encoder_degree(-40, 40, 130)
+    laura.encoder_time(-70, -70, 700)
+    
 
 
 
