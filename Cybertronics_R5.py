@@ -36,7 +36,7 @@ def Route5(laura: Laura):
     laura.wall_square()
     laura.gyro_acc(75, 170)
     laura.encoder_degree(-70, 70, 165)
-    laura.gyro_acc(75, 600, -90, 50, decel_dist=150) #580
+    laura.gyro_acc(75, 590, -90, 50, decel_dist=150) #580
     laura.gyro_point_turn(0, False)
     laura.gyro_time(-50, 700)
     laura.adapter_motor_seconds(LEFT_ADAPTER, -1000, 1500)

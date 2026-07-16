@@ -43,8 +43,6 @@ def Route9(laura: Laura):
     laura.encoder_degree(-60, -60, 300)
     laura.encoder_degree(-40, 40, 130)
     laura.encoder_time(-70, -70, 700)
-    
-
 
 
     """ Route end """

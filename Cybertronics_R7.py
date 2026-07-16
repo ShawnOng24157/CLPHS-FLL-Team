@@ -45,9 +45,6 @@ def Route7(laura: Laura):
     laura.encoder_degree(-60,-60,340,True)
     laura.gyro_lock_turn(RIGHT_DRIVE,-90,True)
 
-    
-
-
 
 
     """ Route end """
