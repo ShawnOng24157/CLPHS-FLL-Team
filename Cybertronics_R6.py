@@ -34,23 +34,13 @@ def Route6(laura: Laura):
 
     """ Start your code here """
     laura.wall_square()
-    laura.encoder_degree(70, 0, 40)
-    laura.gyro_acc(80, 420, 24)
-    laura.encoder_degree(80, -80, 305)
-    laura.gyro_acc(-80, 500, 180, 50, stop=False)
-    laura.gyro_time(-50, 350, 180, False)
-    laura.gyro_acc(60, 22, 180, stop=False)
-    laura.adapter_motor_seconds(RIGHT_ADAPTER, -600, 1000, wait_complete=False)
-    laura.encoder_degree(-70, 70, 185)
-    laura.encoder_acc(45, 50, 130, stop=False)
-
-    laura.encoder_time(45, 50, 600)
-    laura.adapter_motor_seconds(RIGHT_ADAPTER, 200, 1300, wait_complete=False)
-    laura.adapter_motor_seconds(LEFT_ADAPTER, -600, 1000, wait_complete=False)
-    wait(1000)
-    laura.encoder_acc(-60, -60, 200, stop=False)
-    laura.gyro_point_turn(200, decel_dist=70, stop=False)
-    laura.gyro_acc(120, 850, 200)
+    laura.gyro_acc(80, 400, stop=False)
+    laura.gyro_time(45, 1000)
+    laura.adapter_motor_seconds(LEFT_ADAPTER, 450, 1600)
+    laura.adapter_motor_seconds(LEFT_ADAPTER, -350, 1400, wait_complete=False)
+    wait(600)
+    laura.gyro_degree(-150, 735, -40, stop=False)
+    laura.gyro_lock_turn(RIGHT_DRIVE, 0, True, 100, 0)
 
 
     """ Route end """

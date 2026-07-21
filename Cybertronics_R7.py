@@ -33,14 +33,8 @@ def Route7(laura: Laura):
     laura.hub_status_light(Color.MAGENTA)
 
     """ Start your code here """
-    laura.wall_square()
-    laura.gyro_acc(80, 400, stop=False)
-    laura.gyro_time(45, 1000)
-    laura.adapter_motor_seconds(LEFT_ADAPTER, 450, 1600)
-    laura.adapter_motor_seconds(LEFT_ADAPTER, -350, 1400, wait_complete=False)
-    wait(600)
-    laura.gyro_degree(-150, 735, -40, stop=False)
-    laura.gyro_lock_turn(RIGHT_DRIVE, 0, True, 100, 0)
+
+
 
 
 
