@@ -6,7 +6,7 @@ from ACL_FLL_v04_Cybertronics import *
 ################## Shared and local constants ##################
 
 # Adapter configuration: (LeftPower, RightPower, LeftLimit, RightLimit)
-ROUTE_ADAPTER_POWER = (1, 0, 30, 30)
+ROUTE_ADAPTER_POWER = (-60, 0, 30, 30)
 
 # Route-Specific PID Gains
 STR_KP_CUSTOM = 1.5
@@ -33,17 +33,14 @@ def Route7(laura: Laura):
     laura.hub_status_light(Color.MAGENTA)
 
     """ Start your code here """
-
     laura.wall_square()
-    laura.adapter_motor_seconds(LEFT_ADAPTER,200,500,Stop.BRAKE,True)
-    laura.encoder_degree(50,50,1310,True)
-    # laura.gyro_lock_turn(RIGHT_DRIVE, -47, 1)
-    laura.gyro_point_turn(-44, True,2)
-    laura.encoder_degree(50,50,240,True)
-    laura.encoder_degree(-100,-100,70,True)
-    laura.adapter_motor_seconds(RIGHT_ADAPTER,-500,600,Stop.BRAKE,True)
-    laura.encoder_degree(-60,-60,340,True)
-    laura.gyro_lock_turn(RIGHT_DRIVE,-90,True)
+    laura.gyro_acc(80, 400, stop=False)
+    laura.gyro_time(45, 1000)
+    laura.adapter_motor_seconds(LEFT_ADAPTER, 450, 1600)
+    laura.adapter_motor_seconds(LEFT_ADAPTER, -350, 1400, wait_complete=False)
+    wait(600)
+    laura.gyro_degree(-150, 735, -40, stop=False)
+    laura.gyro_lock_turn(RIGHT_DRIVE, 0, True, 100, 0)
 
 
 
