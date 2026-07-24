@@ -6,7 +6,7 @@ from ACL_FLL_v04_Cybertronics import *
 ################## Shared and local constants ##################
 
 # Adapter configuration: (LeftPower, RightPower, LeftLimit, RightLimit)
-ROUTE_ADAPTER_POWER = (-40, -40, 30, 30)
+ROUTE_ADAPTER_POWER = (0, 0, 30, 30)
 
 # Route-Specific PID Gains
 STR_KP_CUSTOM = 1.5
@@ -24,32 +24,23 @@ LF_KD_CUSTOM = 0.1
 # Blue base - Robot right wheel align 1st line from right
 # Mission - Mountain rock
 
-def Route7(laura: Laura):
+def Cal(laura: Laura):
 
-    print("\n--- Starting Route 7 ---")
+    print("\n--- Starting Route 10 ---")
     routeTimer = StopWatch()
     laura.port_view_battery()
     routeTimer.reset()
     laura.hub_status_light(Color.MAGENTA)
 
     """ Start your code here """
-    laura.wall_square()
-    laura.gyro_acc(80, 780)
-    laura.encoder_degree(-65, 0, 100, False)
-    laura.gyro_time(65, 1500, -45)
-    laura.adapter_motor_seconds(LEFT_ADAPTER, 600, 1000, wait_complete=False)
-    laura.adapter_motor_seconds(RIGHT_ADAPTER, 600, 1000)
-    laura.gyro_acc(-80, 90, -45, stop=False)
-    laura.gyro_acc(-150, 780)
-    wait(350)
-    laura.gyro_point_turn(90, True, 100, 0)
+    laura.calibrate_sensor()
 
 
 
     """ Route end """
     elapsed_time = routeTimer.time() / 1000
     print(f"Total Time: {elapsed_time:.2f} seconds")
-    print("--- Route 7 Complete ---")
+    print("--- Calibration Complete ---")
 
 ######################## Route testing ########################
 
@@ -63,4 +54,4 @@ if __name__ == "__main__":
     test.adapter_motor_brake(LEFT_ADAPTER)
     test.adapter_motor_brake(RIGHT_ADAPTER)
 
-    Route7(test)
+    Cal(test)

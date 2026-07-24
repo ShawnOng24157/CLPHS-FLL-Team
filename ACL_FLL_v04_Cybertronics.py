@@ -108,6 +108,24 @@ class Laura():
         self._stopWatch = StopWatch()
         self._internalClock = StopWatch()
 
+        self._cal = {
+            RIGHT_COLOUR: {"low": 10, "high": 80}
+        }
+        
+        try:
+            # Pybricks Native Storage: Read 2 bytes starting at offset 0
+            data = self._hub.system.storage(0, read=2)
+            
+            # If the high value is 0, the memory is blank (factory state)
+            if data[1] > 0: 
+                self._cal[RIGHT_COLOUR]["low"] = data[0]
+                self._cal[RIGHT_COLOUR]["high"] = data[1]
+                # print(f"Loaded Cal A: {data[0]}-{data[1]}")
+            else:
+                print("Storage blank. Using default 10-80.")
+        except Exception as e:
+            print("Failed to read storage:", e)
+
     # ==========================================
     # UTILITY FUNCTIONS
     # ==========================================
@@ -131,30 +149,43 @@ class Laura():
     
     def reset_gyro(self, angle=0):
         self._gyro_offset = self._hub.imu.rotation(Axis.Z) - angle
-    
-    def calibrate_sensor(self, port):
-        print("\n--- Starting calibration ---")
-        if port in self._sensor_map:
-            low = self._sensor_map[port].reflection()
-            high = self._sensor_map[port].reflection()
 
-            while not Button.BLUETOOTH in self._hub.buttons.pressed():
-                if self._sensor_map[port].reflection() < low:
-                    low = self._sensor_map[port].reflection()
-                    self.hub_speaker_beep(200, 50)
-                elif self._sensor_map[port].reflection() > high:
-                    high = self._sensor_map[port].reflection()
-                    self.hub_speaker_beep(200, 50)
-        else:
-            print(f"ERROR: Invalid Port : '{port}'")
-            return
+    def calibrate_sensor(self):
+        """
+        Calibrates the minimum (LOW) and maximum (HIGH) reflection values of Sensor A
+        and permanently saves them to the Hub's non-volatile storage.
+        """
+        print(f"\n--- Starting calibration for COLOUR_A ---")
+        
+        low = self._colour_B.reflection()
+        high = self._colour_B.reflection()
+
+        while not Button.RIGHT in self._hub.buttons.pressed():
+            current_ref = self._colour_B.reflection()
+            if current_ref < low:
+                low = current_ref
+                self.hub_speaker_beep(200, 50)
+            elif current_ref > high:
+                high = current_ref
+                self.hub_speaker_beep(200, 50)
 
         self.hub_speaker_beep(1000, 50)
         self.hub_speaker_beep(1500, 50)
         self.hub_speaker_beep(1000, 50)
+        
         print("\n--- Colour Sensor Calibration Results ---")
-        print("Low = ", low, "High = ", high)
-        print("ACTION REQUIRED: Manually update these values in code library for persistence.")
+        print(f"COLOUR_B -> Low: {low} | High: {high}")
+        
+        # 1. Update the live memory
+        self._cal[RIGHT_COLOUR]["low"] = low
+        self._cal[RIGHT_COLOUR]["high"] = high
+        
+        # 2. Write the 2 values to the Pybricks Native Storage (Offset 0)
+        try:
+            self._hub.system.storage(0, write=bytes([low, high]))
+            print("SUCCESS: Calibration permanently saved to hub memory!")
+        except Exception as e:
+            print("ERROR: Failed to save byte data ->", e)
 
     def motor_pairing(self, power=100, duration=5000):
         self._reset_encoders()

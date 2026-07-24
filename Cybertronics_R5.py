@@ -38,8 +38,8 @@ def Route5(laura: Laura):
     laura.encoder_degree(-70, 70, 165)
     laura.gyro_acc(75, 590, -90, 50, decel_dist=150) #580
     laura.gyro_point_turn(0, False)
-    laura.gyro_time(-50, 700)
-    laura.adapter_motor_seconds(LEFT_ADAPTER, -1000, 1500)
+    laura.gyro_time(-50, 600)
+    laura.adapter_motor_seconds(LEFT_ADAPTER, -1000, 2200)
     laura.adapter_motor_seconds(LEFT_ADAPTER, 1000, 800, Stop.COAST, False)
     laura.adapter_motor_seconds(RIGHT_ADAPTER, -300, 650, wait_complete=False)
     wait(150)
@@ -54,6 +54,9 @@ def Route5(laura: Laura):
     laura.encoder_time(60, 0, 700)
     laura.gyro_lock_turn(LEFT_DRIVE, -110, stop=False)
     laura.gyro_acc(120, 800, -110)
+    wait(350)
+    laura.gyro_point_turn(0, True, 200, 0)
+
 
     
     """ Route end """

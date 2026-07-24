@@ -6,7 +6,7 @@ from ACL_FLL_v04_Cybertronics import *
 ################## Shared and local constants ##################
 
 # Adapter configuration: (LeftPower, RightPower, LeftLimit, RightLimit)
-ROUTE_ADAPTER_POWER = (35, 35, 30, 30)
+ROUTE_ADAPTER_POWER = (-60, 0, 30, 30)
 
 # Route-Specific PID Gains
 STR_KP_CUSTOM = 1.5
