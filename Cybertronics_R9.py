@@ -6,7 +6,7 @@ from ACL_FLL_v04_Cybertronics import *
 ################## Shared and local constants ##################
 
 # Adapter configuration: (LeftPower, RightPower, LeftLimit, RightLimit)
-ROUTE_ADAPTER_POWER = (40, 40, 30, 30)
+ROUTE_ADAPTER_POWER = (-40, 40, 30, 30)
 
 # Route-Specific PID Gains
 STR_KP_CUSTOM = 1.5
@@ -39,18 +39,20 @@ def Route9(laura: Laura):
     laura.encoder_degree(80, -80, 305)
     laura.gyro_acc(-80, 500, 180, 50, stop=False)
     laura.gyro_time(-50, 350, 180, False)
-    laura.gyro_acc(60, 22, 180, stop=False)
+    laura.gyro_acc(60, 15, 180)
+    wait(200)
     laura.adapter_motor_seconds(RIGHT_ADAPTER, -600, 1000, wait_complete=False)
-    laura.encoder_degree(-70, 70, 180)
-    laura.encoder_acc(45, 50, 130, stop=False)
+    laura.encoder_degree(-70, 70, 170)
+    laura.encoder_acc(45, 50, 200)
+    laura.adapter_motor_seconds(LEFT_ADAPTER, 600, 1000)
 
     laura.encoder_time(45, 50, 600)
     laura.adapter_motor_seconds(RIGHT_ADAPTER, 200, 1300, wait_complete=False)
-    laura.adapter_motor_seconds(LEFT_ADAPTER, -600, 1000, wait_complete=False)
-    wait(1000)
+    laura.adapter_motor_seconds(LEFT_ADAPTER, -300, 1200, wait_complete=False)
+    wait(1200)
     laura.encoder_acc(-60, -60, 200, stop=False)
-    laura.gyro_point_turn(200, decel_dist=70, stop=False)
-    laura.gyro_acc(120, 850, 200)
+    laura.gyro_point_turn(192, decel_dist=70, stop=False)
+    laura.gyro_acc(120, 850, 192)
     wait(350)
     laura.gyro_point_turn(0, True, 100, 0)
     

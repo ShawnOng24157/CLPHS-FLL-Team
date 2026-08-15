@@ -34,10 +34,10 @@ def Route2(laura: Laura):
 
     """ Start your code here """
     laura.wall_square()
-    laura.gyro_acc(80, 250, stop=False)
-    laura.encoder_degree(0, 70, 90, False)
-    laura.gyro_acc(80, 400, -43, stop=False)
-    laura.gyro_point_turn(43, False)
+    laura.gyro_acc(80, 250)
+    laura.encoder_degree(0, 70, 90)
+    laura.gyro_acc(80, 400, -43)
+    laura.gyro_point_turn(43)
     laura.gyro_degree(60, 100, 43, False)
     laura.adapter_motor_seconds(RIGHT_ADAPTER, -1000, 700, wait_complete=False)
     laura.gyro_time(50, 950, 43)

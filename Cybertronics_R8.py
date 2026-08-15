@@ -37,9 +37,6 @@ def Route8(laura: Laura):
     laura.encoder_time(60, 55, 700)
     laura.adapter_motor_seconds(RIGHT_ADAPTER, 500, 700, Stop.COAST)
     laura.encoder_acc(-90, -90, 900)
-    wait(350)
-    laura.gyro_point_turn(-90, True, 100, 0)
-
 
 
     """ Route end """

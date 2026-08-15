@@ -37,7 +37,7 @@ def Route10(laura: Laura):
     laura.gyro_acc(70, 330, stop=False)
     laura.adapter_motor_seconds(LEFT_ADAPTER, 1000, 1400, Stop.BRAKE, False)
     laura.gyro_lock_turn(LEFT_DRIVE, 65, decel_dist=40)
-    laura.gyro_time(55, 1300, 65)
+    laura.gyro_time(50, 1150, 65)
     laura.adapter_motor_seconds(LEFT_ADAPTER, -1000, 1400, Stop.COAST, False)
     laura.gyro_degree(-60, 340, 65, False)
     laura.gyro_degree(-120, 550)
