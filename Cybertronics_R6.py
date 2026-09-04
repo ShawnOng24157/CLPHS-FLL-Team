@@ -34,21 +34,16 @@ def Route6(laura: Laura):
 
     """ Start your code here """
     laura.wall_square()
-    laura.gyro_lock_turn(RIGHT_DRIVE, -25)
-    laura.gyro_lock_turn(LEFT_DRIVE, 0)
-    laura.gyro_acc(80, 400, stop=False)
-    laura.gyro_time(50, 1000)
-
-
-    laura.adapter_motor_seconds(LEFT_ADAPTER, 600, 1000)
-    laura.adapter_motor_seconds(LEFT_ADAPTER, -350, 1300, wait_complete=False)
-    laura.adapter_motor_seconds(RIGHT_ADAPTER, 800, 1500)
-    laura.adapter_motor_seconds(RIGHT_ADAPTER, -900, 1500)
-
-
-    laura.gyro_degree(-150, 735, -40, stop=False)
+    laura.gyro_acc(75, 450, -2.5, stop=False)
+    laura.gyro_time(45, 400)
+    laura.adapter_motor_seconds(LEFT_ADAPTER, 1000, 560)
+    laura.adapter_motor_seconds(LEFT_ADAPTER, -1000, 500, wait_complete=False)
+    laura.adapter_motor_seconds(RIGHT_ADAPTER, 1000, 1000)
+    laura.adapter_motor_seconds(RIGHT_ADAPTER, -1000, 1000, wait_complete=False)
+    wait(400)
+    laura.gyro_degree(-80, 100, 0, False)
+    laura.gyro_degree(-120, 750, -30, False)
     laura.gyro_lock_turn(RIGHT_DRIVE, 0, True, 100, 0)
-
 
     """ Route end """
     elapsed_time = routeTimer.time() / 1000

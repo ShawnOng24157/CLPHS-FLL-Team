@@ -6,7 +6,7 @@ from ACL_FLL_v04_Cybertronics import *
 ################## Shared and local constants ##################
 
 # Adapter configuration: (LeftPower, RightPower, LeftLimit, RightLimit)
-ROUTE_ADAPTER_POWER = (-40, 40, 30, 30)
+ROUTE_ADAPTER_POWER = (-40, -40, 30, 30)
 
 # Route-Specific PID Gains
 STR_KP_CUSTOM = 1.5
@@ -41,15 +41,15 @@ def Route9(laura: Laura):
     laura.gyro_time(-50, 350, 180, False)
     laura.gyro_acc(60, 15, 180)
     wait(200)
-    laura.adapter_motor_seconds(RIGHT_ADAPTER, -600, 1000, wait_complete=False)
+    laura.adapter_motor_seconds(RIGHT_ADAPTER, 300, 1000, wait_complete=False)
     laura.encoder_degree(-70, 70, 170)
     laura.encoder_acc(45, 50, 200)
     laura.adapter_motor_seconds(LEFT_ADAPTER, 600, 1000)
 
     laura.encoder_time(45, 50, 600)
-    laura.adapter_motor_seconds(RIGHT_ADAPTER, 200, 1300, wait_complete=False)
+    laura.adapter_motor_seconds(RIGHT_ADAPTER, -150, 1500, wait_complete=False)
     laura.adapter_motor_seconds(LEFT_ADAPTER, -300, 1200, wait_complete=False)
-    wait(1200)
+    wait(2000)
     laura.encoder_acc(-60, -60, 200, stop=False)
     laura.gyro_point_turn(192, decel_dist=70, stop=False)
     laura.gyro_acc(120, 850, 192)
