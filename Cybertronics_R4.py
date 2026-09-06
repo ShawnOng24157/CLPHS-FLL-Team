@@ -37,7 +37,7 @@ def Route4(laura: Laura):
     laura.gyro_acc(80, 400, stop=False)
     laura.adapter_motor_seconds(LEFT_ADAPTER, -1000, 600, wait_complete=False)
     laura.gyro_time(50, 500)
-    for i in range(3):
+    for i in range(4):
         laura.adapter_motor_seconds(LEFT_ADAPTER, 1000, 600)
         laura.adapter_motor_seconds(LEFT_ADAPTER, -1000, 600)
     laura.gyro_acc(-120, 400)

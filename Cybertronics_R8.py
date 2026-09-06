@@ -33,8 +33,8 @@ def Route8(laura: Laura):
     laura.hub_status_light(Color.MAGENTA)
 
     """ Start your code here """
-    laura.encoder_acc(80, 78, 700, min_power=55, stop=False)
-    laura.encoder_time(55, 55, 1400)
+    laura.encoder_acc(80, 75, 700, min_power=65, stop=False)
+    laura.encoder_time(65, 63, 1000)
     laura.adapter_motor_seconds(LEFT_ADAPTER, 1000, 800, Stop.COAST)
     laura.encoder_degree(-44, -44, 100, stop=False)
     laura.encoder_degree(-80, -85, 700)
