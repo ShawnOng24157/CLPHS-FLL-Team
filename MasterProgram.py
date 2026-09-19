@@ -21,6 +21,7 @@ import Cybertronics_R7 as route7
 import Cybertronics_R8 as route8
 import Cybertronics_R9 as route9 
 import Cybertronics_R10 as route10
+import Cybertronics_R11 as route11
 
 # List of available route modules
 ROUTE_MODULES = {
@@ -33,7 +34,8 @@ ROUTE_MODULES = {
     7: route7,
     8: route8,
     9: route9,
-    10: route10
+    10: route10,
+    11: route11
 }
 
 # Dictionary mapping route number to the execution function
@@ -47,7 +49,8 @@ ROUTES = {
     7: route7.Route7,
     8: route8.Route8,
     9: route9.Route9,
-    10: route10.Route10
+    10: route10.Route10,
+    11: route11.Route11
 }
 
 def run_adapters(bot: Laura, current_route: int):

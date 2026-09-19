@@ -40,7 +40,7 @@ def Route7(laura: Laura):
     laura.adapter_motor_seconds(LEFT_ADAPTER, 600, 1000, wait_complete=False)
     laura.adapter_motor_seconds(RIGHT_ADAPTER, 600, 1000)
     laura.gyro_acc(-80, 90, -45, stop=False)
-    laura.gyro_acc(-150, 780)
+    laura.gyro_acc(-150, 780, 10)
     wait(350)
     laura.gyro_point_turn(90, True, 100, 0)
 

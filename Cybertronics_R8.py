@@ -41,7 +41,7 @@ def Route8(laura: Laura):
     laura.encoder_degree(50, 50, 50)
     laura.adapter_motor_seconds(RIGHT_ADAPTER, 1000, 600, Stop.COAST, False)
     wait(200)
-    laura.encoder_degree(-80, -85, 800)
+    laura.encoder_degree(-100, -105, 800)
 
     
 
