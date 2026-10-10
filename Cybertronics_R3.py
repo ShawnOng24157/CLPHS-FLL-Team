@@ -39,10 +39,10 @@ def Route3(laura: Laura):
     laura.gyro_time(55, 700, -43)
     laura.adapter_motor_seconds(RIGHT_ADAPTER, -800, 1200)
     laura.adapter_motor_seconds(LEFT_ADAPTER, 300, 2000, wait_complete=False)
-    laura.encoder_time(-50, -95, 1300)
+    laura.encoder_time(-70, -115, 1300)
     laura.encoder_degree(65, 65, 30)
     laura.adapter_motor_seconds(RIGHT_ADAPTER, 600, 1000)
-    laura.encoder_acc(-110, -90, 600, stop=False, min_power=70)
+    laura.encoder_acc(-120, -80, 620, stop=False, min_power=70)
     wait(350)
     laura.gyro_lock_turn(RIGHT_DRIVE, 0, True, 1000, 0)
     
