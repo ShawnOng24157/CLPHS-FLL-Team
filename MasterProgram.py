@@ -1,16 +1,14 @@
-######################## Pyricks library ########################
+######################## Pybricks library ########################
 from pybricks.hubs import PrimeHub
 from pybricks.pupdevices import Motor
 from pybricks.parameters import Axis, Button, Color, Direction, Port, Stop, Icon
 from pybricks.robotics import DriveBase
 from pybricks.tools import wait, StopWatch
 
-# --- Import Core Library & Constants ---
+from micropython import const
+
+######################## Custom program ########################
 from ACL_FLL_v04_Cybertronics import *
-
-######################## Route Program Setup ########################
-
-# Explicitly import route modules and assign them simple aliases.
 import Cybertronics_R1 as route1 
 import Cybertronics_R2 as route2  
 import Cybertronics_R3 as route3 
@@ -23,100 +21,74 @@ import Cybertronics_R9 as route9
 import Cybertronics_R10 as route10
 import Cybertronics_R11 as route11
 
+######################## Total route ########################
+_MAX_ROUTE = const(11) # Modify accordingly
+
 # List of available route modules
 ROUTE_MODULES = {
-    1: route1,
-    2: route2,
-    3: route3,
-    4: route4,
-    5: route5,
-    6: route6,
-    7: route7,
-    8: route8,
-    9: route9,
-    10: route10,
-    11: route11
+    1: route1, 2: route2, 3: route3, 4: route4, 5: route5,
+    6: route6, 7: route7, 8: route8, 9: route9, 10: route10, 11: route11
 }
 
 # Dictionary mapping route number to the execution function
 ROUTES = {
-    1: route1.Route1,
-    2: route2.Route2,
-    3: route3.Route3,
-    4: route4.Route4,
-    5: route5.Route5,
-    6: route6.Route6,
-    7: route7.Route7,
-    8: route8.Route8,
-    9: route9.Route9,
-    10: route10.Route10,
-    11: route11.Route11
+    1: route1.Route1, 2: route2.Route2, 3: route3.Route3, 4: route4.Route4, 5: route5.Route5,
+    6: route6.Route6, 7: route7.Route7, 8: route8.Route8, 9: route9.Route9, 10: route10.Route10, 11: route11.Route11
 }
 
-def run_adapters(bot: Laura, current_route: int):
-    route_module = ROUTE_MODULES.get(current_route)
-    
-    adapter_powers = getattr(route_module, "ROUTE_ADAPTER_POWER", (0, 0, 0, 0)) if route_module else (0, 0, 0, 0)
-    
-    bot.unregulated_adapter(*adapter_powers)
-
-# Main route selection and execution loop
-def select_route(bot: Laura):    
+######################## Main program ########################
+def select_route(bot: Laura):
     current_route = 1
-    max_route = max(ROUTES.keys()) if ROUTES else 0
-
-    if current_route not in ROUTES:
-        current_route = min(ROUTES.keys()) if ROUTES else 0
-        
-    if max_route == 0:
-        bot.hub_display_num(0)
-        print("FATAL: No routes were loaded successfully.")
-        return
     
     while True:
+        # 1. Update Hub Display & Status
         bot.hub_display_num(current_route)
+        bot.hub_status_light(Color.CYAN)
         
-        # Continuously tension the arms for the selected route
-        run_adapters(bot, current_route)
-
+        # 2. Continually Tension Adapters
+        route_module = ROUTE_MODULES.get(current_route)
+        adapter_powers = getattr(route_module, "ROUTE_ADAPTER_POWER", (0, 0, 60, 60))
+        bot.unregulated_adapter(*adapter_powers)
+        
+        # 3. Check Button Presses
         pressed = bot.hub_button_pressed()
-
-        # --- LAUNCH MISSION ---
-        if Button.RIGHT in pressed:
-            # Execute the chosen mission route
-            mission_function = ROUTES.get(current_route)
-            if mission_function:
-                mission_function(bot)
-            
-            # After mission completes, move to the next route number
-            if current_route < max_route:
-                current_route += 1
-            
-            # Reset hub state after mission
-            bot.hub_status_light(Color.CYAN)
-            bot.hub_display_num(current_route)
-            
-            # Wait for them to release the center button before returning to menu
-            while Button.RIGHT in bot.hub_button_pressed():
-                wait(10)
-
+        
         # --- CYCLE LEFT ---
-        elif Button.LEFT in pressed:
-            if current_route > 0:
+        if Button.LEFT in pressed:
+            if current_route > 1:
                 current_route -= 1
             while Button.LEFT in bot.hub_button_pressed():
-                wait(10) 
-            
+                wait(10)
+                
         # --- CYCLE RIGHT ---
         elif Button.BLUETOOTH in pressed:
-            if current_route < max_route:
+            if current_route < _MAX_ROUTE:
                 current_route += 1
             while Button.BLUETOOTH in bot.hub_button_pressed():
                 wait(10)
-
+                
+        # --- EXECUTE ROUTE ---
+        elif Button.RIGHT in pressed:
+            bot.adapter_motor_brake(LEFT_ADAPTER)
+            bot.adapter_motor_brake(RIGHT_ADAPTER)
+            bot.hub_speaker_beep(1000, 200)
+            
+            try:
+                ROUTES[current_route](bot)
+            except SystemExit:
+                bot.robot_stop()
+                continue
+                
+            # Auto-increment next route upon completion
+            if current_route < _MAX_ROUTE:
+                current_route += 1
+                
+            # Wait for button release before returning to loop
+            while Button.RIGHT in bot.hub_button_pressed():
+                wait(10)
+                
         wait(10)
 
-# --- Main Program Entry Point ---
 if __name__ == "__main__":
-    main_bot = Laura()
-    select_route(main_bot)
+    laura = Laura()
+    select_route(laura)
