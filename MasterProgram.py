@@ -71,7 +71,7 @@ def select_route(bot: Laura):
         elif Button.RIGHT in pressed:
             bot.adapter_motor_brake(LEFT_ADAPTER)
             bot.adapter_motor_brake(RIGHT_ADAPTER)
-            bot.hub_speaker_beep(1000, 200)
+            bot.hub_speaker_beep(150, 100)
             
             try:
                 ROUTES[current_route](bot)

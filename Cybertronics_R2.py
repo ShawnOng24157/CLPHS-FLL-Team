@@ -40,7 +40,7 @@ def Route2(laura: Laura):
     laura.gyro_acc(80, 400, -43)
     laura.gyro_point_turn(43)
     laura.gyro_degree(60, 140, 43, False)
-    laura.adapter_motor_seconds(RIGHT_ADAPTER, -500, 1400, wait_complete=False)
+    laura.adapter_motor_seconds(RIGHT_ADAPTER, -1000, 1000, wait_complete=False)
     laura.gyro_time(50, 900, 43)
     laura.adapter_motor_seconds(LEFT_ADAPTER, 1000, 800)
     laura.adapter_motor_seconds(RIGHT_ADAPTER, 400, 1200)

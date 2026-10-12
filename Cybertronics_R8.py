@@ -21,7 +21,7 @@ LF_KD_CUSTOM = 0.1
 ######################## Route program ########################
 
 # --- Starting position ---
-# Blue base - Robot right wheel align 1st line from right
+# Blue base - Robot left wheel align 1.0 line from left
 # Mission - Mountain rock
 
 def Route8(laura: Laura):
@@ -33,17 +33,16 @@ def Route8(laura: Laura):
     laura.hub_status_light(Color.MAGENTA)
 
     """ Start your code here """
-    laura.encoder_acc(80, 75, 700, min_power=45, stop=False)
-    laura.encoder_time(45, 45, 600)
-    laura.adapter_motor_seconds(RIGHT_ADAPTER, -600, 600, wait_complete=False)
-    laura.adapter_motor_seconds(LEFT_ADAPTER, 800, 1500)
-    laura.encoder_degree(-60, -60, 120)
-    laura.encoder_degree(50, 50, 50)
-    laura.adapter_motor_seconds(RIGHT_ADAPTER, 1000, 600, Stop.COAST, False)
-    wait(200)
-    laura.encoder_degree(-100, -105, 800)
-
-    
+    laura.wall_square()
+    laura.gyro_acc(80, 400, min_power=50, stop=False)
+    laura.gyro_time(50, 600)
+    laura.adapter_motor_seconds(RIGHT_ADAPTER, -1000, 750)
+    laura.adapter_motor_seconds(RIGHT_ADAPTER, 400, 1000, wait_complete=False)
+    wait(150)
+    laura.adapter_motor_seconds(LEFT_ADAPTER, 1000, 1500)
+    laura.gyro_degree(-110, 400, -10, stop=False)
+    laura.gyro_degree(-110, 450, -35, stop=False)
+    laura.gyro_lock_turn(RIGHT_DRIVE, 0, True, 100, 0)
 
     """ Route end """
     elapsed_time = routeTimer.time() / 1000

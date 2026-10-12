@@ -6,7 +6,7 @@ from ACL_FLL_v04_Cybertronics import *
 ################## Shared and local constants ##################
 
 # Adapter configuration: (LeftPower, RightPower, LeftLimit, RightLimit)
-ROUTE_ADAPTER_POWER = (-40, -40, 30, 30)
+ROUTE_ADAPTER_POWER = (-40, 40, 30, 30)
 
 # Route-Specific PID Gains
 STR_KP_CUSTOM = 1.5
@@ -34,15 +34,16 @@ def Route7(laura: Laura):
 
     """ Start your code here """
     laura.wall_square()
-    laura.gyro_acc(80, 780)
-    laura.encoder_degree(-65, 0, 100, False)
-    laura.gyro_time(65, 1500, -45)
-    laura.adapter_motor_seconds(LEFT_ADAPTER, 600, 1000, wait_complete=False)
-    laura.adapter_motor_seconds(RIGHT_ADAPTER, 600, 1000)
-    laura.gyro_acc(-80, 90, -45, stop=False)
-    laura.gyro_acc(-150, 780, 10)
-    wait(350)
-    laura.gyro_point_turn(90, True, 100, 0)
+    laura.adapter_motor_seconds(RIGHT_ADAPTER, -1000, 700, wait_complete=False)
+    laura.gyro_acc(80, 725)
+    laura.encoder_degree(0, 80, 90, False)
+    laura.gyro_lock_turn(RIGHT_DRIVE, -45)
+    laura.gyro_time(65, 1000, -45)
+    laura.adapter_motor_seconds(RIGHT_ADAPTER, 400, 1000, wait_complete=False)
+    laura.adapter_motor_seconds(LEFT_ADAPTER, 1000, 1000, Stop.COAST)
+    laura.gyro_degree(-80, 120, -45, False)
+    laura.gyro_degree(-120, 1200, 20)
+
 
 
 

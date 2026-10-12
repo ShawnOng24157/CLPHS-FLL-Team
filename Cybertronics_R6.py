@@ -6,7 +6,7 @@ from ACL_FLL_v04_Cybertronics import *
 ################## Shared and local constants ##################
 
 # Adapter configuration: (LeftPower, RightPower, LeftLimit, RightLimit)
-ROUTE_ADAPTER_POWER = (-35, 35, 30, 30)
+ROUTE_ADAPTER_POWER = (-40, -40, 30, 30)
 
 # Route-Specific PID Gains
 STR_KP_CUSTOM = 1.5
@@ -21,7 +21,7 @@ LF_KD_CUSTOM = 0.1
 ######################## Route program ########################
 
 # --- Starting position ---
-# Blue base - Robot left wheel align 1.0 line from left
+# Blue base - Robot right wheel align 1st line from right
 # Mission - Mountain rock
 
 def Route6(laura: Laura):
@@ -34,15 +34,28 @@ def Route6(laura: Laura):
 
     """ Start your code here """
     laura.wall_square()
-    laura.gyro_acc(80, 400, min_power=50, stop=False)
-    laura.gyro_time(50, 600)
-    laura.adapter_motor_seconds(RIGHT_ADAPTER, -1000, 750)
-    laura.adapter_motor_seconds(RIGHT_ADAPTER, 400, 1000, wait_complete=False)
-    wait(150)
-    laura.adapter_motor_seconds(LEFT_ADAPTER, 1000, 1500)
-    laura.gyro_degree(-110, 400, -10, stop=False)
-    laura.gyro_degree(-110, 450, -35, stop=False)
-    laura.gyro_lock_turn(RIGHT_DRIVE, 0, True, 100, 0)
+    laura.encoder_degree(70, 0, 40)
+    laura.gyro_acc(80, 420, 24)
+    laura.encoder_degree(80, -80, 305)
+    laura.gyro_acc(-80, 500, 180, 50, stop=False)
+    laura.gyro_time(-50, 350, 180, False)
+    laura.gyro_acc(60, 15, 180)
+    wait(200)
+    laura.adapter_motor_seconds(RIGHT_ADAPTER, 300, 1000, wait_complete=False)
+    laura.encoder_degree(-70, 70, 170)
+    laura.encoder_acc(45, 50, 200)
+    laura.adapter_motor_seconds(LEFT_ADAPTER, 600, 1000)
+
+    laura.encoder_time(45, 50, 600)
+    laura.adapter_motor_seconds(RIGHT_ADAPTER, -150, 1500, wait_complete=False)
+    laura.adapter_motor_seconds(LEFT_ADAPTER, -300, 1200, wait_complete=False)
+    wait(2000)
+    laura.encoder_acc(-60, -60, 200, stop=False)
+    laura.gyro_point_turn(192, decel_dist=70, stop=False)
+    laura.gyro_acc(120, 850, 192)
+    wait(350)
+    laura.gyro_point_turn(0, True, 100, 0)
+    
 
     """ Route end """
     elapsed_time = routeTimer.time() / 1000

@@ -68,7 +68,7 @@ def Route1(laura: Laura):
     laura.gyro_point_turn(-270)
     laura.encoder_degree(100, 90, 1300)
     wait(500)
-    laura.gyro_point_turn(0, True, 100, 0)
+    laura.gyro_point_turn(0, True, 100, -360)
 
 
     """ Route end """
