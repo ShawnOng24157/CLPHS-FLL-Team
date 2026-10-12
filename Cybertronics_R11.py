@@ -6,7 +6,7 @@ from ACL_FLL_v04_Cybertronics import *
 ################## Shared and local constants ##################
 
 # Adapter configuration: (LeftPower, RightPower, LeftLimit, RightLimit)
-ROUTE_ADAPTER_POWER = (-40, 100, 30, 30)
+ROUTE_ADAPTER_POWER = (40, 80, 30, 30)
 
 # Route-Specific PID Gains
 STR_KP_CUSTOM = 1.5
@@ -33,19 +33,29 @@ def Route11(laura: Laura):
     laura.hub_status_light(Color.MAGENTA)
 
     """ Start your code here """
+    laura.adapter_motor_seconds(LEFT_ADAPTER, -1000, 800, wait_complete=False)
     laura.wall_square()
-    laura.gyro_acc(70, 240)
-    laura.encoder_degree(80, -80, 155, False)
+    laura.gyro_acc(70, 235)
+    laura.gyro_point_turn(90)
     laura.gyro_acc(75, 700, 90, 50, stop=False)
     laura.line_follow_degree(-1, 50, RIGHT_COLOUR, 300)
     laura.gyro_point_turn(0)
     laura.gyro_acc(75, 550)
+    laura.adapter_motor_seconds(RIGHT_ADAPTER, -1000, 2000, wait_complete=False)
     laura.gyro_point_turn(90)
-    laura.gyro_acc(65, 250, 90)
+    laura.gyro_acc(65, 230, 90)
     laura.gyro_lock_turn(LEFT_DRIVE, 0)
     laura.gyro_time(60, 850)
-    laura.adapter_motor_seconds(LEFT_ADAPTER, 1000, 800, wait_complete=False)
-    laura.adapter_motor_seconds(RIGHT_ADAPTER, 1000, 2000)
+    laura.adapter_motor_seconds(RIGHT_ADAPTER, 1200, 2300)
+    laura.gyro_acc(-70, 50)
+    laura.adapter_motor_seconds(LEFT_ADAPTER, 1000, 800, wait_complete=True)
+    laura.gyro_acc(-80, 50)
+    laura.gyro_lock_turn(RIGHT_DRIVE, 33)
+    laura.gyro_acc(-80, 700, 33)
+    laura.gyro_lock_turn(RIGHT_DRIVE, -60)
+    laura.adapter_motor_seconds(RIGHT_ADAPTER, -1100, 2300)
+    # laura.gyro_lock_turn(LEFT_DRIVE, -100)
+    # laura.encoder_degree(100, 100, 1000)
 
 
 
