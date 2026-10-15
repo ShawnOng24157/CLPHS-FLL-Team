@@ -73,8 +73,8 @@ class Laura():
             "KP_GYRO": 3.0,
             "KD_GYRO": 0.18,
             "KI_GYRO": 0.0002,
-            "KP_GYROPT": 4.0,
-            "KD_GYROPT": 0.55,
+            "KP_GYROPT": 4.5,
+            "KD_GYROPT": 0.7,
             "KP_GYROLT": 5.0,
             "KD_GYROLT": 0.9,
             "KP_FAST": 0.4,
@@ -99,6 +99,7 @@ class Laura():
         # }
 
         self._hub.system.set_stop_button([Button.BLUETOOTH, Button.RIGHT])
+        # self._hub.system.set_stop_button(Button.CENTER)
 
         # WRO State Variables
         self._gyro_offset = 0
@@ -160,7 +161,7 @@ class Laura():
         low = self._colour_B.reflection()
         high = self._colour_B.reflection()
 
-        while not Button.RIGHT in self._hub.buttons.pressed():
+        while not Button.BLUETOOTH in self._hub.buttons.pressed():
             current_ref = self._colour_B.reflection()
             if current_ref < low:
                 low = current_ref
@@ -637,7 +638,7 @@ class Laura():
         self._gyro_move('acc', distance, power, angle, stop, self._pid["KP_GYRO"], self._pid["KD_GYRO"], self._pid["KI_GYRO"], min_power, accel_dist, decel_dist, None)
 
     def gyro_point_turn(self, angle, stop=True, accel_dist=10, decel_dist=20):
-        self._gyro_turn(angle, None, stop, self._pid["KP_GYROPT"], self._pid["KD_GYROPT"], 45, 90, accel_dist, decel_dist)
+        self._gyro_turn(angle, None, stop, self._pid["KP_GYROPT"], self._pid["KD_GYROPT"], 45, 85, accel_dist, decel_dist)
         print(self._get_gyro_angle())
 
     def gyro_lock_turn(self, port, angle, stop=True, accel_dist=2, decel_dist=2):
