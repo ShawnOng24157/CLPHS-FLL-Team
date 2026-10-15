@@ -54,7 +54,7 @@ def Route1(laura: Laura):
     wait(600)
     laura.encoder_degree(50, 53, 200, stop=False)
     laura.encoder_time(50, 53, 700)
-    laura.gyro_degree(-45, 50, -270)
+    laura.gyro_degree(-45, 45, -270)
     laura.adapter_motor_seconds(LEFT_ADAPTER, -700, 1700)
     wait(600)
     laura.adapter_motor_seconds(LEFT_ADAPTER, 1000, 500, wait_complete=False)
